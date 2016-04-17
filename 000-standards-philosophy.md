@@ -35,6 +35,10 @@ Extensibility should be done very naturally.
 
 Triggesrs seem to be the most picky part of developing this.
 
+# Database
+
+Database will use namespaces, so we can reuse code.
+
 # Development
 
 It should be more centered in easy development and API exposition for developers.

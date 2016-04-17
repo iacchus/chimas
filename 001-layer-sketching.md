@@ -1,4 +1,5 @@
 module: auth-default
-layers: users
+layers: users, groups
+
 module: bbs-default
 layers: boards, topics, threads (?)
