@@ -34,3 +34,16 @@ Extensibility should be done very naturally.
 ### Triggers
 
 Triggesrs seem to be the most picky part of developing this.
+
+# Development
+
+It should be more centered in easy development and API exposition for developers.
+
+# Other stuff
+
+* It should be fun to extend. And also easy.
+* It should be fun to run. (not much black magic to run and setup)
+* It should be fun to use.
+* It should be beautiful.
+* Better if it works out-of-box with minimal setup.
+* It should be easy to write clients.
