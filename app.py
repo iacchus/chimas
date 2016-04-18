@@ -3,14 +3,12 @@ import string
 
 import cherrypy
 
-class StringGen(object):
+cherrypy.config.update({'server.socket_port': 41345})
+
+class App(object):
     @cherrypy.expose
     def index(self):
-        return "Hello wrld."
-
-    @cherrypy.expose
-    def generate(self):
-        return ''.join(random.sample(string.hexdigits, 8))
+        return "CHIMAS BBS SERVER, PLEASE USE A CLIENT."
 
 if __name__ == '__main__':
-    cherrypy.quickstart(StringGen())
+    cherrypy.quickstart(App())
