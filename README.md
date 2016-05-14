@@ -4,9 +4,9 @@ This project has in mind to develop a modularized, extensible and easily maintai
 
 ### Dependencies:
 
-* Python EVE
-* eve-sqlalchemy
-* sqlalchemy
+* Python EVE ([docs](http://python-eve.org/))
+* Eve Sqlalchemy extension ([docs](https://eve-sqlalchemy.readthedocs.io/))
+* sqlalchemy ([website/docs](http://www.sqlalchemy.org/))
 
 ### Good to know
 

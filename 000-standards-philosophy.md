@@ -39,9 +39,17 @@ Triggesrs seem to be the most picky part of developing this.
 
 Database will use namespaces, so we can reuse code.
 
+# Deployment
+
+Our philosophy is that the deployment be easy as that by executing a single command you have an forum ready to be running in the default port, with the admin account set to a autoomatically generated password.
+
 # Development
 
 It should be more centered in easy development and API exposition for developers.
+
+# Security
+
+Admin password automatically generated so that it can be deployed with simplicity and easy of use.
 
 # Other stuff
 
@@ -51,3 +59,7 @@ It should be more centered in easy development and API exposition for developers
 * It should be beautiful.
 * Better if it works out-of-box with minimal setup.
 * It should be easy to write clients.
+
+# Still other stuff
+
+We should release an API schema, ie., a protocol, this implementation being only a proof-of-concept.
