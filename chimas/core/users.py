@@ -1,11 +1,15 @@
-from sqlalchemy.ext.declarative import declarative_base
+from eve_sqlalchemy.decorators import registerSchema
+
+from core import Base as Base
+
+#from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import (
         Column,
         String,
         Integer,
         )
 
-Base = declarative_base()
+#Base = declarative_base()
 
 class Users(Base):
     __tablename__ = 'users'
@@ -14,3 +18,8 @@ class Users(Base):
     login = Column(String)
     email = Column(String)
     password = Column(String)
+    created = Column(String)
+    updated = Column(String)
+    etag = Column(String)
+
+registerSchema('users')(Users)
