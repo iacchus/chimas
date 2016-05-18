@@ -9,11 +9,11 @@ DEBUG = True
 # FIELDS
 
 ID_FIELD            = "id"
-ID_FIELD_LOOKUP     = "id"
 ITEM_LOOKUP_FIELD   = "id"
 ETAG_FIELD          = "etag"
 DATE_CREATED        = "created"
 LAST_UPDATED        = "updated"
+DELETED             = "deleted"
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + join(basedir,'dummy.sqlite3-autocreate')
 DOMAIN = {
@@ -21,4 +21,7 @@ DOMAIN = {
     'posts'  : Posts._eve_schema['posts'],
     'users'  : Users._eve_schema['users'],
 }
-PUBLIC_METHODS = ['GET']
+PUBLIC_METHODS = ['GET','POST']
+
+import json
+print(Boards._eve_schema['boards'])
