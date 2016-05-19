@@ -29,30 +29,27 @@ class CommonTable(Base):
     etag = Column(String)
     deleted = Column(String)
 
-    def do_method(when, resource, request, lookup):
+    def do_method(preorpost_prefix, resource, request, lookup):
 
         method = request.method.lower()
-
         table = get_class_by_tablename(resource)
 
         if table != None:
             print("table {0} found!\n".format(table.__tablename__))
-            methodCall = getattr(table, method)
-            return methodCall(resource, request, lookup)
+            try :
+                print("We're 'try'ing the method")
+                methodCall = getattr(table, preorpost_prefix + method)
+                return methodCall(resource, request, lookup)
+            except:
+                pass
 
-    def do_pre_method(resource, request, lookup):
-        do_method('pre', resource, request, lookup)
+            print("Passed executing method")
 
-    def do_post_method(resource, request, lookup):
-        do_method('post', resource, request, lookup)
+    def do_pre_method(resource, request, lookup=None):
+        __class__.do_method('pre_', resource, request, lookup)
 
-    def get(resource, request, lookup):
-
-        print("METHOD WAS EXECUTED! resource: {0}\nrequest: {1}\nlookup: {2}\n".format(resource,request,lookup))
-
-    def post(resource, request, lookup=None):
-
-        print("METHOD WAS EXECUTED! resource: {0}\nrequest: {1}\nlookup: {2}\n".format(resource,request,lookup))
+    def do_post_method(resource, request, lookup=None):
+        __class__.do_method('post_', resource, request, lookup)
 
 class Boards(CommonTable):
     __tablename__ = 'boards'
@@ -77,6 +74,12 @@ class Users(CommonTable):
     login = Column(String)
     email = Column(String)
     password = Column(String)
+
+    def pre_post(res,req,lookup):
+        print("We're inside the pre_post method.")
+
+    def post_post(res,req,lookup):
+        print("We're inside the post_post method.")
 
 registerSchema('boards')(Boards)
 registerSchema('posts')(Posts)
