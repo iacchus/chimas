@@ -17,18 +17,11 @@ DELETED             = "deleted"
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + join(basedir,'dummy.sqlite3-autocreate')
 
-
-
 DOMAIN = {
     'boards' : Boards._eve_schema['boards'],
     'posts'  : Posts._eve_schema['posts'],
     'users'  : Users._eve_schema['users'],
 }
-
-DOMAIN['users'].update({
-    'resource_methods' : [ 'GET', 'POST', 'DELETE' ]
-})
-
 
 #RESOURCE METHODS = ['GET']
 PUBLIC_METHODS = ['GET','POST']

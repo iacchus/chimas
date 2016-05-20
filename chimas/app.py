@@ -3,17 +3,24 @@ from eve import Eve
 from eve_sqlalchemy import SQL
 from eve_sqlalchemy.validation import ValidatorSQL
 
+from core.auth import ChimasAuth
 from core import Base as Base
 
 from core import CommonTable
 from core import Users, Boards, Posts
 
-app = Eve(auth=None, validator=ValidatorSQL, data=SQL)
+#app = Eve(auth=None, validator=ValidatorSQL, data=SQL)
+app = Eve(auth=ChimasAuth, validator=ValidatorSQL, data=SQL)
 
-db = app.data.driver
-Base.metadata.bind = db.engine
-db.Model = Base
-db.create_all()
+#db = app.data.driver
+#Base.metadata.bind = db.engine
+#db.Model = Base
+#db.create_all()
+
+Base.metadata.bind = app.data.driver.engine
+app.data.driver.Model = Base
+app.data.driver.create_all()
+
 
 methods_list = [ 'GET', 'HEAD', 'PATCH', 'POST', 'PUT', 'DELETE' ]
 for each_method in methods_list:
@@ -22,11 +29,5 @@ for each_method in methods_list:
 
 if __name__ == "__main__":
 
-#    app.on_pre_GET += CommonTable.do_method
-#    app.on_pre_HEAD += CommonTable.do_method
-#    app.on_pre_PATCH += CommonTable.do_method
-#    app.on_pre_POST += CommonTable.do_method
-#    app.on_pre_PUT += CommonTable.do_method
-#    app.on_pre_DELETE += CommonTable.do_method
 
     app.run();

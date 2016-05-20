@@ -12,6 +12,7 @@ from sqlalchemy import func
 
 from eve.utils import config # FIXME
 config.ID_FIELD = 'id'
+#config.LAST_UPDATED = 'updated'
 
 Base = declarative_base()
 
@@ -48,8 +49,8 @@ class CommonTable(Base):
     def do_pre_method(resource, request, lookup=None):
         __class__.do_method('pre_', resource, request, lookup)
 
-    def do_post_method(resource, request, lookup=None):
-        __class__.do_method('post_', resource, request, lookup)
+    def do_post_method(resource, request, payload=None):
+        __class__.do_method('post_', resource, request, payload)
 
 class Boards(CommonTable):
     __tablename__ = 'boards'
@@ -68,19 +69,29 @@ class Posts(CommonTable):
     post_text = Column(String)
     hash_id = Column(String)
 
+users_schema = {
+    'resource_methods' : [ 'GET', 'POST' ],
+    'item_methods' : [ 'GET', 'DELETE' ]
+}
+
 class Users(CommonTable):
     __tablename__ = 'users'
 
-    login = Column(String)
+    id = Column(Integer, autoincrement=True, unique=True)
+    login = Column(String, primary_key=True, unique=True)
     email = Column(String)
     password = Column(String)
 
     def pre_post(res,req,lookup):
         print("We're inside the pre_post method.")
 
-    def post_post(res,req,lookup):
+    def post_post(res,req,payload):
         print("We're inside the post_post method.")
+        print(payload)
+
+
 
 registerSchema('boards')(Boards)
 registerSchema('posts')(Posts)
 registerSchema('users')(Users)
+Users._eve_schema['users'].update(users_schema)
