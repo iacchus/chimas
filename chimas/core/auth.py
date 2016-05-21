@@ -14,9 +14,6 @@ class ChimasAuth(BasicAuth):
         print("login: {0}\npassword: {1}\n".format(login,password))
         user = app.data.driver.session.query(Users).get(login)
 
-        #from pprint import pprint
-        #pprint(user)
-
         if user and user.password == password:
             return True
         else:

@@ -10,6 +10,10 @@ from sqlalchemy import (
 
 from sqlalchemy import func
 
+from .schemas.boards import boards_schema
+from .schemas.posts import posts_schema
+from .schemas.users import users_schema
+
 from eve.utils import config # FIXME
 config.ID_FIELD = 'id'
 #config.LAST_UPDATED = 'updated'
@@ -25,8 +29,8 @@ class CommonTable(Base):
     __abstract__ =  True
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    created = Column(String, default = func.now())
-    updated = Column(String, default = func.now(), onupdate = func.now())
+    created = Column(DateTime, default = func.now())
+    updated = Column(DateTime, default = func.now(), onupdate = func.now())
     etag = Column(String)
     deleted = Column(String)
 
@@ -69,10 +73,10 @@ class Posts(CommonTable):
     post_text = Column(String)
     hash_id = Column(String)
 
-users_schema = {
-    'resource_methods' : [ 'GET', 'POST' ],
-    'item_methods' : [ 'GET', 'DELETE' ]
-}
+#users_schema = {
+#    'resource_methods' : [ 'GET', 'POST' ],
+#    'item_methods' : [ 'GET', 'DELETE' ]
+#}
 
 class Users(CommonTable):
     __tablename__ = 'users'
@@ -94,4 +98,6 @@ class Users(CommonTable):
 registerSchema('boards')(Boards)
 registerSchema('posts')(Posts)
 registerSchema('users')(Users)
+Boards._eve_schema['boards'].update(boards_schema)
+Posts._eve_schema['posts'].update(posts_schema)
 Users._eve_schema['users'].update(users_schema)

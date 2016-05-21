@@ -29,4 +29,5 @@ ITEM_METHODS = ['GET']
 #PUBLIC_ITEM_METHODS = []
 
 import pprint
-pprint.pprint(Users._eve_schema['users'], width=1)
+#pprint.pprint(Users._eve_schema['users'], width=1)
+pprint.pprint(DOMAIN['posts'], width=-1)
