@@ -86,6 +86,9 @@ class Users(CommonTable):
     email = Column(String)
     password = Column(String)
 
+    def pre_get(res,req,lookup):
+        print("res: {0} - req: {1} - lookup: {2}\n".format(res,req,lookup))
+
     def pre_post(res,req,lookup):
         print("We're inside the pre_post method.")
 
@@ -93,7 +96,12 @@ class Users(CommonTable):
         print("We're inside the post_post method.")
         print(payload)
 
+class Roles(CommonTable):
+    __tablename__ = 'roles'
 
+    id = Column(Integer, autoincrement=True, unique=True)
+    title = Column(String, primary_key=True, unique=True)
+    users = Column(String)
 
 registerSchema('boards')(Boards)
 registerSchema('posts')(Posts)

@@ -2,7 +2,6 @@ from sqlalchemy import func
 
 users_schema = {
     'datasource': {
-
         'projection': {
             'created': 1,
             'deleted': 1,
@@ -13,10 +12,8 @@ users_schema = {
             'password': 1,
             'updated': 1
         },
-
         'source': 'Users'
     },
-
     'item_lookup': True,
     'item_lookup_field': 'id',
     'item_methods': ['GET', 'DELETE'],
