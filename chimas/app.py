@@ -21,6 +21,7 @@ Base.metadata.bind = app.data.driver.engine
 app.data.driver.Model = Base
 app.data.driver.create_all()
 
+Base.query = app.data.driver.session.query_property()
 
 methods_list = [ 'GET', 'HEAD', 'PATCH', 'POST', 'PUT', 'DELETE' ]
 for each_method in methods_list:

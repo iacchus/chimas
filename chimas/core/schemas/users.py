@@ -1,6 +1,7 @@
 from sqlalchemy import func
 
 users_schema = {
+    'allowed_roles': ['all','me','you'],
     'datasource': {
         'projection': {
             'created': 1,

@@ -18,12 +18,18 @@ from eve.utils import config # FIXME
 config.ID_FIELD = 'id'
 #config.LAST_UPDATED = 'updated'
 
+from flask import current_app as app
+from flask import abort
+
+
 Base = declarative_base()
 
 def get_class_by_tablename(table_fullname):
-  for c in Base._decl_class_registry.values():
-    if hasattr(c, '__table__') and c.__table__.fullname == table_fullname:
-      return c
+    for c in Base._decl_class_registry.values():
+        if hasattr(c, '__table__') and c.__table__.fullname == table_fullname:
+            return c
+        else:
+            return None
 
 class CommonTable(Base):
     __abstract__ =  True
@@ -42,7 +48,7 @@ class CommonTable(Base):
         if table != None:
             print("table {0} found!\n".format(table.__tablename__))
             try :
-                print("We're 'try'ing the method")
+                print("We're trying '{0}' the method".format(preorpost_prefix))
                 methodCall = getattr(table, preorpost_prefix + method)
                 return methodCall(resource, request, lookup)
             except:
@@ -90,7 +96,8 @@ class Users(CommonTable):
         print("res: {0} - req: {1} - lookup: {2}\n".format(res,req,lookup))
 
     def pre_post(res,req,lookup):
-        print("We're inside the pre_post method.")
+        print("We're inside the pre_post method. And trying to abort(301)")
+        abort(301)
 
     def post_post(res,req,payload):
         print("We're inside the post_post method.")
@@ -101,7 +108,26 @@ class Roles(CommonTable):
 
     id = Column(Integer, autoincrement=True, unique=True)
     title = Column(String, primary_key=True, unique=True)
+    prefix = Column(String)
     users = Column(String)
+
+    def is_authorized(user, is_authenticated, allowed_roles, resource, method, lookup):
+
+        if 'anonymous' in allowed_roles:
+            return True
+
+        if 'registered' in allowed_roles:
+            if is_authenticated:
+                return True
+
+        if 'moderators' in allowed_roles:
+            pass
+
+        #if 'owner' in allowed_roles:
+
+
+        #login = user.login
+
 
 registerSchema('boards')(Boards)
 registerSchema('posts')(Posts)

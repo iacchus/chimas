@@ -23,3 +23,27 @@ These should be well implemented, for example, should we allow admins to edit us
 #### guests or anonymous
 
 `guests` or `anon` is a role which all non-registered users can perform. We should not include registered ones in this, because we may want to distinguish between them, for example, so we can show a message only for non-registered users.
+
+### Global and Custom roles
+
+#### Global Roles
+
+* admins
+* anonymous
+* registered
+
+#### Custom roles
+
+*(provided by / roles)*
+
+Boards
+
+* moderators
+
+Posts
+
+* author / owner
+
+Users
+
+* owner
