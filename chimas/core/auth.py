@@ -34,13 +34,12 @@ class ChimasAuth(BasicAuth):
             if is_authenticated:
                 return True
 
-#        if 'moderators' in allowed_roles:
-#            prefix = "mods_"
-#            cur_item_roles = Roles.query.filter(prefix+resource)
-
         if 'owner' in allowed_roles and is_authenticated:
             res = get_class_by_tablename(resource)
-            res.query.filter(lookup.keys()==,red.authorid == login)
+            res_key = getattr(res,lookup.keys())
+            restult = res.query.filter(res_key == lookup.values(), res.author_id == login)
+
+            return True
 
         return False
 

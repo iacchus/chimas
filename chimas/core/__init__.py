@@ -87,9 +87,9 @@ class Posts(CommonTable):
 class Users(CommonTable):
     __tablename__ = 'users'
 
-    id = Column(Integer, autoincrement=True, unique=True)
+    id = Column(Integer, autoincrement=True, nullable=False, unique=True)
     login = Column(String, primary_key=True, unique=True)
-    email = Column(String)
+    email = Column(String, unique=True)
     password = Column(String)
 
     def pre_get(res,req,lookup):

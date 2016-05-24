@@ -16,6 +16,7 @@ boards_schema = {
     'item_lookup': True,
     'item_lookup_field': 'id',
     'item_url': 'regex("[0-9]+")',
+    'resource_methods': ['GET', 'POST'],
     'schema': {
         'created': {
             'default': func.now,
