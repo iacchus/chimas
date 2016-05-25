@@ -22,7 +22,7 @@ users_schema = {
     'resource_methods': ['GET', 'POST'],
     'schema': {
         'created': {
-            'default': func.now,
+            'default': func.now(),
             'nullable': True,
             'required': False,
             'type': 'datetime',
@@ -64,7 +64,7 @@ users_schema = {
             'unique': False
         },
         'updated': {
-            'default': func.now,
+            'default': func.now(),
             'nullable': True,
             'required': False,
             'type': 'datetime',

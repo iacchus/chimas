@@ -65,14 +65,17 @@ class CommonTable(Base):
 class Boards(CommonTable):
     __tablename__ = 'boards'
 
-    title = Column(String)
+    id = None
+    title = Column(String, primary_key=True, unique=True)
     description = Column(String)
 
 class Posts(CommonTable):
     __tablename__ = 'posts'
 
-    topic_id = Column(Integer)
-    reply_to_id = Column(Integer)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    topic_id = Column(String) # FIXME: int is returning 422 when using python's requests
+    reply_to_id = Column(String) # FIXME: int is returning 422 when using python's requests
+
     board_id = Column(String)
     author_id = Column(String)
     title = Column(String)
@@ -93,16 +96,16 @@ class Users(CommonTable):
     email = Column(String, unique=True)
     password = Column(String)
 
-    def pre_get(res,req,lookup):
-        print("res: {0} - req: {1} - lookup: {2}\n".format(res,req,lookup))
+#    def pre_get(res,req,lookup):
+#        print("res: {0} - req: {1} - lookup: {2}\n".format(res,req,lookup))
 
-    def pre_post(res,req,lookup):
-        print("We're inside the pre_post method. And trying to abort(301)")
-        abort(301)
+#    def pre_post(res,req,lookup):
+#        print("We're inside the pre_post method. And trying to abort(301)")
+#        abort(301)
 
-    def post_post(res,req,payload):
-        print("We're inside the post_post method.")
-        print(payload)
+#    def post_post(res,req,payload):
+#        print("We're inside the post_post method.")
+#        print(payload)
 
 class Roles(CommonTable):
     __tablename__ = 'roles'

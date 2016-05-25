@@ -21,6 +21,7 @@ posts_schema = {
     'item_lookup': True,
     'item_lookup_field': 'id',
     'item_url': 'regex("[0-9]+")',
+    'resource_methods': ['GET', 'POST'],
     'schema': {
         'author_id': {
             'nullable': True,
@@ -35,7 +36,7 @@ posts_schema = {
             'unique': False
         },
         'created': {
-            'default': func.now,
+            'default': func.now(),
             'nullable': True,
             'required': False,
             'type': 'datetime',
@@ -73,7 +74,7 @@ posts_schema = {
         'reply_to_id': {
             'nullable': True,
             'required': False,
-            'type': 'integer',
+            'type': 'string', # FIXME: int is returning 422 when using python's requests
             'unique': False
         },
         'title': {
@@ -85,11 +86,11 @@ posts_schema = {
         'topic_id': {
             'nullable': True,
             'required': False,
-            'type': 'integer',
+            'type': 'string', # FIXME: int is returning 422 when using python's requests
             'unique': False
         },
         'updated': {
-            'default': func.now,
+            'default': func.now(),
             'nullable': True,
             'required': False,
             'type': 'datetime',

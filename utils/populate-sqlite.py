@@ -20,17 +20,9 @@ boards = [
         {'title':'another board','description':'Yet still another board.'},
         {'title':'yet another board','description':'hello another board here'},
         ]
-#    topic_id = Column(Integer)
-#    reply_to_id = Column(Integer)
-#    board_id = Column(String)
-#    author_id = Column(String)
-#    title = Column(String)
-#    post_text = Column(String)
-#    hash_id = Column(String)
 
 posts = [
     {
-#        'id' : '',
         'topic_id': '1',
         'reply_to_id': '0',
         'board_id': 'first board',
@@ -40,7 +32,6 @@ posts = [
         'hash_id': 'deadd34d',
     },
     {
-#        'id' : '',
         'topic_id': '1',
         'reply_to_id': '1',
         'board_id': 'first board', # maybe not necessary to replies
@@ -50,7 +41,6 @@ posts = [
         'hash_id': 'cafedead',
     },
     {
-#        'id' : '',
         'topic_id': '1',
         'reply_to_id': '1',
         'board_id': 'first board',  # maybe not necessary to replies
@@ -59,14 +49,13 @@ posts = [
         'post_text': 'This is our third post and second reply.',
         'hash_id': 'b33fc4ke',
     },
-
-
 ]
 
 for i in users:
     r = requests.post(host+'/users', data=i)
 
-#    r = requests.post(host+'/users', auth=creds, data=i)
-
 for i in boards:
     r = requests.post(host+'/boards', data=i)
+
+for i in posts:
+    r = requests.post(host+'/posts', data=i)
