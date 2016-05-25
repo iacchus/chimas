@@ -87,7 +87,8 @@ class Posts(CommonTable):
 class Users(CommonTable):
     __tablename__ = 'users'
 
-    id = Column(Integer, autoincrement=True, nullable=False, unique=True)
+    #id = Column(Integer, autoincrement=True, unique=True)
+    id = None
     login = Column(String, primary_key=True, unique=True)
     email = Column(String, unique=True)
     password = Column(String)

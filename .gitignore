@@ -1,2 +1,6 @@
 build/
 dist/
+__pycache__
+core/__pycache__
+core/chimas/__pycache__
+core/dummy.sqlite3-autocreate

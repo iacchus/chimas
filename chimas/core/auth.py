@@ -24,7 +24,7 @@ class ChimasAuth(BasicAuth):
 
         user = Users.query.filter(Users.login == login).first()
 
-        if 'anonymous' in allowed_roles:
+        if 'anonymous' in allowed_roles and login == "anon":
             return True
 
         if user and user.password == password:
