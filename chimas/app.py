@@ -24,6 +24,11 @@ app.data.driver.create_all()
 Base.query = app.data.driver.session.query_property()
 
 methods_list = [ 'GET', 'HEAD', 'PATCH', 'POST', 'PUT', 'DELETE' ]
+resources_list = ['boards', 'posts', 'users']
+
+# http://python-eve.org/features.html#database-event-hooks
+dbevent_list = ['fetched_resource', 'fetched_item', 'on_insert', 'on_inserted']
+
 for each_method in methods_list:
     setattr(app, 'on_pre_{0}'.format(each_method), CommonTable.do_pre_method)
     setattr(app, 'on_post_{0}'.format(each_method), CommonTable.do_post_method)

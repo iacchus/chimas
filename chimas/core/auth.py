@@ -3,6 +3,7 @@ from flask import current_app as app
 from flask import request as current_request
 
 from core import Base
+from core import Posts
 from core import Users
 from core import Roles
 
@@ -16,11 +17,10 @@ class ChimasAuth(BasicAuth):
     def check_auth(self, login, password, allowed_roles, resource, method):
 
         try:
-            lookup = list(current_request.view_args)[0]
-        except IndexError:
+            lookup = current_request.view_args
+            (lookup_key, lookup_value) = lookup.popitem()
+        except KeyError:
             lookup = None
-
-        #print("lookup: ",lookup,"\n", request.url, "\n", request.headers)
 
         user = Users.query.filter(Users.login == login).first()
 
@@ -35,13 +35,15 @@ class ChimasAuth(BasicAuth):
                 return True
 
         if 'owner' in allowed_roles and is_authenticated:
-            res = get_class_by_tablename(resource)
-            res_key = getattr(res,lookup.keys())
-            restult = res.query.filter(res_key == lookup.values(), res.author_id == login)
 
-            return True
+            print(allowed_roles)
+
+            #owner_column_name = 'author_id'
+
+            posts = Posts.query.filter(Posts.author_id == login, Posts.id == lookup_value).first()
+
+            if posts!= None:
+                return True
 
         return False
-
-        #else:
-        #    return False
+        

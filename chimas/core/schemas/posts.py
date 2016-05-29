@@ -1,6 +1,8 @@
 from sqlalchemy import func
 
 posts_schema = {
+    'allowed_item_write_roles': ['admin', 'owner'],
+    'allowed_item_read_roles': ['admin', 'owner', 'other'],
     'datasource': {
         'projection': {
             'author_id': 1,
@@ -20,6 +22,7 @@ posts_schema = {
     },
     'item_lookup': True,
     'item_lookup_field': 'id',
+    'item_methods': ['GET', 'DELETE'],
     'item_url': 'regex("[0-9]+")',
     'resource_methods': ['GET', 'POST'],
     'schema': {

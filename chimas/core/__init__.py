@@ -24,8 +24,8 @@ from flask import abort
 
 Base = declarative_base()
 
-def get_class_by_tablename(table_fullname):
-    for c in Base._decl_class_registry.values():
+def get_class_by_tablename(table_fullname, base=Base):
+    for c in base._decl_class_registry.values():
         if hasattr(c, '__table__') and c.__table__.fullname == table_fullname:
             return c
         else:

@@ -1,7 +1,8 @@
 from sqlalchemy import func
 
 users_schema = {
-    'allowed_roles': ['all','me','you'],
+    'allowed_roles': ['registered'],
+    'allowed_item_read_roles': ['owner'],
     'datasource': {
         'projection': {
             'created': 1,
@@ -15,8 +16,9 @@ users_schema = {
         },
         'source': 'Users'
     },
+    #'id_field': 'login',
     'item_lookup': True,
-    'item_lookup_field': 'id',
+    'item_lookup_field': 'login',
     'item_methods': ['GET', 'DELETE'],
     'item_url': 'regex("[0-9]+")',
     'resource_methods': ['GET', 'POST'],
