@@ -7,7 +7,7 @@ from core import Posts
 from core import Users
 from core import Roles
 
-from core import get_class_by_tablename
+#from core import get_class_by_tablename
 
 # this will be based on roles
 # http://python-eve.org/authentication.html#role-based-access-control
@@ -16,6 +16,8 @@ class ChimasAuth(BasicAuth):
 
     def check_auth(self, login, password, allowed_roles, resource, method):
 
+        is_authenticated = False
+        
         try:
             lookup = current_request.view_args
             (lookup_key, lookup_value) = lookup.popitem()
@@ -34,7 +36,7 @@ class ChimasAuth(BasicAuth):
             if is_authenticated:
                 return True
 
-        if 'owner' in allowed_roles and is_authenticated:
+        if 'owner' in allowed_roles and is_authenticated and lookup != None:
 
             print(allowed_roles)
 
@@ -46,4 +48,3 @@ class ChimasAuth(BasicAuth):
                 return True
 
         return False
-        

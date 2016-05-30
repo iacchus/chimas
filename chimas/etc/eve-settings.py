@@ -1,8 +1,10 @@
 from core import Boards, Posts, Users
 
-from os.path import abspath, dirname, join
+from flask import current_app as app
 
-basedir = abspath(dirname(__file__))
+from os.path import abspath
+
+basedir = abspath(".") # FIXME: this gets parent directory from 'etc/'
 
 DEBUG = True
 
@@ -23,11 +25,14 @@ DOMAIN = {
     'users'  : Users._eve_schema['users'],
 }
 
-#RESOURCE METHODS = ['GET']
-PUBLIC_METHODS = ['POST']
 ITEM_METHODS = []
-#PUBLIC_ITEM_METHODS = []
+PUBLIC_ITEM_METHODS = []
+PUBLIC_METHODS = []
+RESOURCE_METHODS = []
 
-import pprint
-#pprint.pprint(Users._eve_schema['users'], width=1)
-pprint.pprint(DOMAIN['posts'], width=-1)
+ALLOWED_ROLES = []
+ALLOWED_READ_ROLES = []
+ALLOWED_WRITE_ROLES = []
+ALLOWED_ITEM_ROLES = []
+ALLOWED_ITEM_READ_ROLES = []
+ALLOWED_ITEM_WRITE_ROLES = []

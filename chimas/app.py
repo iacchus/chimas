@@ -9,8 +9,10 @@ from core import Base as Base
 from core import CommonTable
 from core import Users, Boards, Posts
 
-#app = Eve(auth=None, validator=ValidatorSQL, data=SQL)
-app = Eve(auth=ChimasAuth, validator=ValidatorSQL, data=SQL)
+
+app = Eve(settings='etc/eve-settings.py', auth=ChimasAuth, validator=ValidatorSQL, data=SQL)
+
+#print("app.root_path: {0}\n".format(app.instance_path))
 
 #db = app.data.driver
 #Base.metadata.bind = db.engine

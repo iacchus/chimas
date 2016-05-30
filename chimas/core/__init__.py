@@ -21,7 +21,6 @@ config.ID_FIELD = 'id'
 from flask import current_app as app
 from flask import abort
 
-
 Base = declarative_base()
 
 def get_class_by_tablename(table_fullname, base=Base):
@@ -81,11 +80,6 @@ class Posts(CommonTable):
     title = Column(String)
     post_text = Column(String)
     hash_id = Column(String)
-
-#users_schema = {
-#    'resource_methods' : [ 'GET', 'POST' ],
-#    'item_methods' : [ 'GET', 'DELETE' ]
-#}
 
 class Users(CommonTable):
     __tablename__ = 'users'

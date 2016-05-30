@@ -3,8 +3,6 @@ from requests.auth import HTTPBasicAuth
 
 host = "http://127.0.0.1:5000"
 
-#creds = ("","")
-
 users = [
         {'login':'admin','email':'admin@ourhost.fqdn','password':'4dm1n'},
         {'login':'mercurio','email':'mercurioo@ourhost.fqdn','password':'4dmi11n'},

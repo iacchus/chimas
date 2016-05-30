@@ -16,7 +16,7 @@ users_schema = {
         },
         'source': 'Users'
     },
-    #'id_field': 'login',
+    'id_field': 'login',
     'item_lookup': True,
     'item_lookup_field': 'login',
     'item_methods': ['GET', 'DELETE'],
