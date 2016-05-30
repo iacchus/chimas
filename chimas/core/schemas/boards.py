@@ -1,6 +1,12 @@
 from sqlalchemy import func
 
 boards_schema = {
+    'allowed_read_roles': ['public'],
+    'allowed_roles': [], #FIXME!!
+    'allowed_write_roles': ['admin'],
+    'allowed_item_read_roles': ['public'],
+    'allowed_item_roles': [],
+    'allowed_item_write_roles': ['admin'],
     'datasource': {
         'projection': {
             'created': 1,
@@ -16,6 +22,8 @@ boards_schema = {
     'item_lookup': True,
     'item_lookup_field': 'id',
     'item_url': 'regex("[0-9]+")',
+    'public_methods': ['GET', 'HEAD'],
+    'public_item_methods': ['GET', 'HEAD'],
     'resource_methods': ['GET', 'POST'],
     'schema': {
         'created': {

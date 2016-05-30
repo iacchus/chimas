@@ -16,8 +16,11 @@ class ChimasAuth(BasicAuth):
 
     def check_auth(self, login, password, allowed_roles, resource, method):
 
+        if 'public' in allowed_roles:
+            return True
+            
         is_authenticated = False
-        
+
         try:
             lookup = current_request.view_args
             (lookup_key, lookup_value) = lookup.popitem()
@@ -45,6 +48,9 @@ class ChimasAuth(BasicAuth):
             posts = Posts.query.filter(Posts.author_id == login, Posts.id == lookup_value).first()
 
             if posts!= None:
+                return True
+
+            if login == 'admin' and is_authenticated:
                 return True
 
         return False

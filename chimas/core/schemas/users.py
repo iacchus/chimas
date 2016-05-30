@@ -1,8 +1,12 @@
 from sqlalchemy import func
 
 users_schema = {
-    'allowed_roles': ['registered'],
-    'allowed_item_read_roles': ['owner'],
+    'allowed_read_roles': ['admin', 'owner'],
+    'allowed_roles': [], #FIXME!!
+    'allowed_write_roles': ['public'],
+    'allowed_item_read_roles': ['admin', 'owner'],
+    'allowed_item_roles': ['admin', 'owner']
+    'allowed_item_write_roles': ['admin', 'owner'],
     'datasource': {
         'projection': {
             'created': 1,
@@ -11,7 +15,7 @@ users_schema = {
             'etag': 1,
             'id': 1,
             'login': 1,
-            'password': 1,
+            'password': 0,
             'updated': 1
         },
         'source': 'Users'
@@ -19,9 +23,9 @@ users_schema = {
     'id_field': 'login',
     'item_lookup': True,
     'item_lookup_field': 'login',
-    'item_methods': ['GET', 'DELETE'],
+    'item_methods': ['GET', 'HEAD', 'PATCH', 'DELETE'],
     'item_url': 'regex("[0-9]+")',
-    'resource_methods': ['GET', 'POST'],
+    'resource_methods': ['POST'],
     'schema': {
         'created': {
             'default': func.now(),
